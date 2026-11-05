@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.studybudybackend.backend.repository.RepositoryTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-05T01:58:20.083Z" hostname="MacBook-Air-108.local" time="0.207">
+  <properties/>
+  <testcase name="user repository finds email without case sensitivity()" classname="com.example.studybudybackend.backend.repository.RepositoryTests" time="0.064"/>
+  <testcase name="study session repository stores duration and completion time for its user()" classname="com.example.studybudybackend.backend.repository.RepositoryTests" time="0.008"/>
+  <testcase name="membership repository finds memberships from either side()" classname="com.example.studybudybackend.backend.repository.RepositoryTests" time="0.01"/>
+  <testcase name="study group repository matches a trimmed course ignoring case in id order()" classname="com.example.studybudybackend.backend.repository.RepositoryTests" time="0.005"/>
+  <system-out><![CDATA[2026-11-04T17:58:20.085-08:00  INFO 51188 --- [backend] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studybudybackend.backend.repository.RepositoryTests]: RepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-04T17:58:20.095-08:00  INFO 51188 --- [backend] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.repository.RepositoryTests
+2026-11-04T17:58:20.096-08:00  INFO 51188 --- [backend] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studybudybackend.backend.repository.RepositoryTests]: RepositoryTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-04T17:58:20.099-08:00  INFO 51188 --- [backend] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.repository.RepositoryTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-11-04T17:58:20.109-08:00  INFO 51188 --- [backend] [    Test worker] c.e.s.b.repository.RepositoryTests       : Starting RepositoryTests using Java 25 with PID 51188 (started by levrau in /Users/levrau/AndroidStudioProjects/studybudy-backend)
+2026-11-04T17:58:20.109-08:00  INFO 51188 --- [backend] [    Test worker] c.e.s.b.repository.RepositoryTests       : No active profile set, falling back to 1 default profile: "default"
+2026-11-04T17:58:20.133-08:00  INFO 51188 --- [backend] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-04T17:58:20.137-08:00  INFO 51188 --- [backend] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 4 JPA repository interfaces.
+2026-11-04T17:58:20.150-08:00  INFO 51188 --- [backend] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-04T17:58:20.156-08:00  INFO 51188 --- [backend] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-04T17:58:20.157-08:00  INFO 51188 --- [backend] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-11-04T17:58:20.158-08:00  INFO 51188 --- [backend] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:studybudy-repository user=SA
+2026-11-04T17:58:20.158-08:00  INFO 51188 --- [backend] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-11-04T17:58:20.158-08:00  INFO 51188 --- [backend] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:studybudy-repository]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: STUDYBUDY-REPOSITORY/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-04T17:58:20.177-08:00  INFO 51188 --- [backend] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: drop table if exists app_user cascade 
+Hibernate: drop table if exists membership cascade 
+Hibernate: drop table if exists study_group cascade 
+Hibernate: drop table if exists study_session cascade 
+Hibernate: create table app_user (created_at timestamp(6) with time zone not null, id bigint generated by default as identity, display_name varchar(120) not null, email varchar(320) not null, primary key (id))
+Hibernate: create table membership (id bigint generated by default as identity, joined_at timestamp(6) with time zone not null, study_group_id bigint not null, user_id bigint not null, role varchar(30) not null, primary key (id), constraint uk_membership_user_group unique (user_id, study_group_id))
+Hibernate: create table study_group (id bigint generated by default as identity, course varchar(40) not null, name varchar(120) not null, primary key (id))
+Hibernate: create table study_session (duration_seconds integer not null, completed_at timestamp(6) with time zone, id bigint generated by default as identity, user_id bigint not null, primary key (id))
+Hibernate: alter table if exists membership add constraint fk_membership_study_group foreign key (study_group_id) references study_group
+Hibernate: alter table if exists membership add constraint fk_membership_user foreign key (user_id) references app_user
+Hibernate: alter table if exists study_session add constraint fk_study_session_user foreign key (user_id) references app_user
+2026-11-04T17:58:20.181-08:00  INFO 51188 --- [backend] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-04T17:58:20.198-08:00  INFO 51188 --- [backend] [    Test worker] c.e.s.b.repository.RepositoryTests       : Started RepositoryTests in 0.097 seconds (process running for 2.677)
+Hibernate: insert into app_user (created_at,display_name,email,id) values (?,?,?,default)
+Hibernate: select u1_0.id from app_user u1_0 where upper(u1_0.email)=upper(?) fetch first ? rows only
+Hibernate: select u1_0.id,u1_0.created_at,u1_0.display_name,u1_0.email from app_user u1_0 where upper(u1_0.email)=upper(?)
+Hibernate: select u1_0.id from app_user u1_0 where upper(u1_0.email)=upper(?) fetch first ? rows only
+Hibernate: insert into app_user (created_at,display_name,email,id) values (?,?,?,default)
+Hibernate: insert into study_session (completed_at,duration_seconds,user_id,id) values (?,?,?,default)
+Hibernate: select ss1_0.id,ss1_0.completed_at,ss1_0.duration_seconds,ss1_0.user_id from study_session ss1_0 where ss1_0.user_id=? order by ss1_0.completed_at desc
+Hibernate: insert into app_user (created_at,display_name,email,id) values (?,?,?,default)
+Hibernate: insert into study_group (course,name,id) values (?,?,default)
+Hibernate: insert into membership (joined_at,role,study_group_id,user_id,id) values (?,?,?,?,default)
+Hibernate: select m1_0.id from membership m1_0 where m1_0.user_id=? and m1_0.study_group_id=? fetch first ? rows only
+Hibernate: select m1_0.id,m1_0.joined_at,m1_0.role,m1_0.study_group_id,m1_0.user_id from membership m1_0 where m1_0.user_id=? order by m1_0.joined_at desc
+Hibernate: select m1_0.id,m1_0.joined_at,m1_0.role,m1_0.study_group_id,m1_0.user_id from membership m1_0 where m1_0.study_group_id=? order by m1_0.joined_at
+Hibernate: insert into study_group (course,name,id) values (?,?,default)
+Hibernate: insert into study_group (course,name,id) values (?,?,default)
+Hibernate: insert into study_group (course,name,id) values (?,?,default)
+Hibernate: select sg1_0.id,sg1_0.course,sg1_0.name from study_group sg1_0 where lower(trim(BOTH from sg1_0.course))=lower(trim(BOTH from ?)) order by sg1_0.id
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
