@@ -1,6 +1,6 @@
 # StudyBudy backend
 
-Kotlin and Spring Boot backend. PostgreSQL is provided by Neon.
+Java and Spring Boot backend. PostgreSQL is provided by Neon.
 
 ## Connect to Neon
 
@@ -16,4 +16,4 @@ Kotlin and Spring Boot backend. PostgreSQL is provided by Neon.
 
 4. Run the service with `./gradlew bootRun`.
 
-Spring Data JPA checks that the schema matches the entities on startup (`ddl-auto: validate`). Manage production schema changes with explicit SQL migrations before adding persistent entities.
+During development, Hibernate updates the Neon schema from the JPA entities (`ddl-auto: update`). For production, manage schema changes with versioned SQL migrations rather than automatic schema updates.
