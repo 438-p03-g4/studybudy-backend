@@ -20,9 +20,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 320)
-    private String email;
-
     @Column(name = "display_name", nullable = false, length = 120)
     private String displayName;
 
