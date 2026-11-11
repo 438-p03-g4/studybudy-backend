@@ -29,6 +29,9 @@ public class User {
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
 
+    @Column(nullable = false, unique = true, length = 320)
+    private String email;
+
     // The Membership entity owns the user-to-membership relationship.
     @OneToMany(mappedBy = "user")
     private Set<Membership> memberships = new HashSet<>();
