@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-// TODO: ADD COMMENTS
     private final UserRepository userRepository;
 
     public AuthController(UserRepository userRepository) {

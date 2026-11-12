@@ -4,6 +4,8 @@ import com.example.studybudybackend.backend.domain.StudyGroup;
 import com.example.studybudybackend.backend.repository.StudyGroupRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
+import org.springframework.boot.security.oauth2.client.autoconfigure.servlet.OAuth2ClientWebSecurityAutoConfiguration;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,6 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(StudyGroupController.class)
+@ImportAutoConfiguration(exclude = OAuth2ClientWebSecurityAutoConfiguration.class)
 class StudyGroupControllerTests {
 
     @Autowired

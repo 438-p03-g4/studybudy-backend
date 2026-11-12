@@ -5,6 +5,7 @@ import com.example.studybudybackend.backend.repository.UserRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.jspecify.annotations.NonNull;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -30,14 +31,23 @@ public class GitHubOAuth2UserService
             List<Map<String, Object>>
             > EMAIL_RESPONSE_TYPE = new ParameterizedTypeReference<>() {};
 
-    private final DefaultOAuth2UserService githubUserService =
-            new DefaultOAuth2UserService();
-
-    private final RestClient restClient = RestClient.create();
+    private final OAuth2UserService<OAuth2UserRequest, OAuth2User> githubUserService;
+    private final RestClient restClient;
     private final UserRepository userRepository;
 
+    @Autowired
     public GitHubOAuth2UserService(UserRepository userRepository) {
+        this(userRepository, new DefaultOAuth2UserService(), RestClient.create());
+    }
+
+    GitHubOAuth2UserService(
+            UserRepository userRepository,
+            OAuth2UserService<OAuth2UserRequest, OAuth2User> githubUserService,
+            RestClient restClient
+    ) {
         this.userRepository = userRepository;
+        this.githubUserService = githubUserService;
+        this.restClient = restClient;
     }
 
     @Override

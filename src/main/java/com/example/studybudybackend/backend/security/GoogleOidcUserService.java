@@ -3,6 +3,7 @@ package com.example.studybudybackend.backend.security;
 import com.example.studybudybackend.backend.domain.User;
 import com.example.studybudybackend.backend.repository.UserRepository;
 import org.jspecify.annotations.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -17,12 +18,20 @@ public class GoogleOidcUserService
         @NonNull OidcUserRequest,
         @NonNull OidcUser
         > {
- // TODO: ADD COMMENTS
-    private final OidcUserService googleUserService = new OidcUserService();
+    private final OAuth2UserService<OidcUserRequest, OidcUser> googleUserService;
     private final UserRepository userRepository;
 
+    @Autowired
     public GoogleOidcUserService(UserRepository userRepository) {
+        this(userRepository, new OidcUserService());
+    }
+
+    GoogleOidcUserService(
+            UserRepository userRepository,
+            OAuth2UserService<OidcUserRequest, OidcUser> googleUserService
+    ) {
         this.userRepository = userRepository;
+        this.googleUserService = googleUserService;
     }
 
     @Override
