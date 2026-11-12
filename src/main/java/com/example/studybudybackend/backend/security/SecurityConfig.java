@@ -18,6 +18,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(
             HttpSecurity http,
             GoogleOidcUserService googleUserService,
+            GitHubOAuth2UserService githubUserService,
             @Value("${app.frontend-success-url}") String frontendSuccessUrl
     ) throws Exception {
         http
@@ -31,10 +32,10 @@ public class SecurityConfig {
                 .oauth2Login(oauth -> oauth
                         .userInfoEndpoint(userInfo ->
                                 userInfo.oidcUserService(googleUserService)
+                                        .userService(githubUserService)
                         )
                         .defaultSuccessUrl(frontendSuccessUrl, true)
                 );
-
         return http.build();
     }
 
