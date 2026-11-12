@@ -20,14 +20,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 320)
-    private String email;
-
     @Column(name = "display_name", nullable = false, length = 120)
     private String displayName;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt = Instant.now();
+
+    @Column(nullable = false, unique = true, length = 320)
+    private String email;
 
     // The Membership entity owns the user-to-membership relationship.
     @OneToMany(mappedBy = "user")
