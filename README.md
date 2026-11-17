@@ -1,6 +1,75 @@
-# StudyBuddy backend
+# StudyBuddy Backend
 
-Java and Spring Boot backend. PostgreSQL is provided by Neon.
+## Local onboarding (API + PostgreSQL)
+
+This repository is the Java 25 / Spring Boot API. The companion client is in
+[studybuddy-app](https://github.com/438-p03-g4/studybuddy-app).
+
+### Prerequisites
+
+- Git and a running Docker engine with Docker Compose v2.
+- Internet access on first build to download images and Gradle dependencies.
+- Free local port 8080. Java is included in the images; no host JDK is needed
+  for this Docker path. Native testing requires JDK 25.
+
+### Clone, configure and start
+
+PowerShell on Windows:
+
+```powershell
+git clone https://github.com/438-p03-g4/studybudy-backend.git
+cd studybudy-backend
+git switch main
+git rev-parse HEAD
+Copy-Item .env.example .env
+docker --version
+docker compose version
+docker info
+docker compose config --quiet
+docker compose up --build -d
+docker compose ps
+curl.exe --fail http://localhost:8080/actuator/health
+```
+
+macOS/Linux: replace `Copy-Item .env.example .env` with `cp .env.example .env`
+and `curl.exe` with `curl`. Other commands are the same.
+
+The build may take several minutes. If the health request is too early, inspect
+`docker compose logs --tail=100 api` and retry once startup has completed.
+Expected: HTTP 200 and a JSON body with `"status":"UP"`.
+
+The Compose database is local PostgreSQL; no Neon account or real secret is
+required for this startup check. The sample OAuth values are deliberately fake:
+Google/GitHub sign-in will not work with them. Protected endpoints such as
+`/groups` require an authenticated session in the current implementation and
+may redirect to sign-in. Health success alone is not proof of full product login.
+
+### Run tests
+
+```powershell
+docker compose --profile test run --build --rm tests
+```
+
+Expected: `BUILD SUCCESSFUL`, exit code 0. Current tests use isolated H2 databases;
+they do not test the running PostgreSQL container or a complete OAuth flow.
+The audited main commit had 15 tests. Record the actual count for the tested commit.
+
+### Demo data and troubleshooting
+
+See [the runbook](docs/runbook.md) for local seed data, logs, ports, stopping the
+stack, native test commands, and known limitations.
+
+Current client checks (`npm run typecheck` and web export) are build checks,
+not a client unit/e2e test suite. Group joining is not a completed client flow yet.
+
+File each onboarding blocker as a separate issue with label `onboarding`, exact
+command/output, expected result, documentation step, and OS/Docker versions.
+
+
+## Optional hosted deployment: Neon and Render
+
+The local Compose path above does not need these credentials. The following
+section preserves the existing hosted-deployment instructions.
 
 ## Connect to Neon
 
