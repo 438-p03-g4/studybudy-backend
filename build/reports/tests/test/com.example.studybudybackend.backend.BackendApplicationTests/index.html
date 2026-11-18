@@ -62,7 +62,7 @@
 </td>
 <td>
 <div class="infoBox duration">
-<div class="counter">6.884s</div>
+<div class="counter">3.578s</div>
 <p>duration</p>
 </div>
 </td>
@@ -93,14 +93,12 @@
 </thead>
 <tbody>
 <tr>
-<td class="success">
-<a href="contextLoads().html">contextLoads()</a>
-</td>
+<td class="success">contextLoads()</td>
 <td class="path" hidden="">contextLoads()</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td data-sort-value="305">0.305s</td>
+<td data-sort-value="3">0.003s</td>
 <td class="success" data-sort-value="100">100%</td>
 </tr>
 </tbody>
@@ -110,10 +108,10 @@
 <div class="tab">
 <h2>standard output</h2>
 <span class="code">
-<pre id="root-0-test-stdout-com.example.studybudybackend.backend.BackendApplicationTests">13:56:21.043 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.studybudybackend.backend.BackendApplicationTests]: BackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-13:56:21.145 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.BackendApplicationTests
-13:56:21.222 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.studybudybackend.backend.BackendApplicationTests]: BackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-13:56:21.224 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.BackendApplicationTests
+<pre id="root-0-test-stdout-com.example.studybudybackend.backend.BackendApplicationTests">2026-11-18T14:18:08.013-08:00  INFO 33832 --- [backend] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studybudybackend.backend.BackendApplicationTests]: BackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-18T14:18:08.019-08:00  INFO 33832 --- [backend] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.BackendApplicationTests
+2026-11-18T14:18:08.022-08:00  INFO 33832 --- [backend] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studybudybackend.backend.BackendApplicationTests]: BackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-11-18T14:18:08.022-08:00  INFO 33832 --- [backend] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.BackendApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -124,17 +122,17 @@
 
  :: Spring Boot ::                (v4.1.1)
 
-2026-11-18T13:56:21.539-08:00  INFO 20984 --- [backend] [    Test worker] c.e.s.backend.BackendApplicationTests    : Starting BackendApplicationTests using Java 25.0.2 with PID 20984 (started by lowpo in C:\Users\lowpo\OneDrive\Documents\GitHub\studybudy-backend)
-2026-11-18T13:56:21.540-08:00  INFO 20984 --- [backend] [    Test worker] c.e.s.backend.BackendApplicationTests    : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2026-11-18T13:56:22.255-08:00  INFO 20984 --- [backend] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-18T13:56:22.312-08:00  INFO 20984 --- [backend] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 4 JPA repository interfaces.
-2026-11-18T13:56:22.963-08:00  INFO 20984 --- [backend] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-11-18T13:56:23.054-08:00  INFO 20984 --- [backend] [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
-2026-11-18T13:56:23.584-08:00  INFO 20984 --- [backend] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-18T13:56:23.615-08:00  INFO 20984 --- [backend] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-11-18T13:56:23.804-08:00  INFO 20984 --- [backend] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:studybudy-context user=SA
-2026-11-18T13:56:23.805-08:00  INFO 20984 --- [backend] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-11-18T13:56:23.862-08:00  INFO 20984 --- [backend] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-11-18T14:18:08.054-08:00  INFO 33832 --- [backend] [    Test worker] c.e.s.backend.BackendApplicationTests    : Starting BackendApplicationTests using Java 25.0.2 with PID 33832 (started by lowpo in C:\Users\lowpo\OneDrive\Documents\GitHub\studybudy-backend)
+2026-11-18T14:18:08.054-08:00  INFO 33832 --- [backend] [    Test worker] c.e.s.backend.BackendApplicationTests    : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2026-11-18T14:18:08.442-08:00  INFO 33832 --- [backend] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-18T14:18:08.494-08:00  INFO 33832 --- [backend] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 41 ms. Found 4 JPA repository interfaces.
+2026-11-18T14:18:08.850-08:00  INFO 33832 --- [backend] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-18T14:18:08.899-08:00  INFO 33832 --- [backend] [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-11-18T14:18:09.153-08:00  INFO 33832 --- [backend] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-18T14:18:09.187-08:00  INFO 33832 --- [backend] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-18T14:18:09.335-08:00  INFO 33832 --- [backend] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:studybudy-context user=SA
+2026-11-18T14:18:09.336-08:00  INFO 33832 --- [backend] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-18T14:18:09.384-08:00  INFO 33832 --- [backend] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:h2:mem:studybudy-context]
 	Database driver: H2 JDBC Driver
 	Database dialect: H2Dialect
@@ -146,11 +144,11 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-11-18T13:56:24.937-08:00  INFO 20984 --- [backend] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-18T13:56:25.017-08:00  INFO 20984 --- [backend] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-18T13:56:25.124-08:00  INFO 20984 --- [backend] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-11-18T13:56:27.287-08:00  INFO 20984 --- [backend] [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
-2026-11-18T13:56:27.363-08:00  INFO 20984 --- [backend] [    Test worker] c.e.s.backend.BackendApplicationTests    : Started BackendApplicationTests in 6.085 seconds (process running for 7.222)
+2026-11-18T14:18:10.080-08:00  INFO 33832 --- [backend] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-18T14:18:10.132-08:00  INFO 33832 --- [backend] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-18T14:18:10.198-08:00  INFO 33832 --- [backend] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-18T14:18:11.499-08:00  INFO 33832 --- [backend] [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-11-18T14:18:11.540-08:00  INFO 33832 --- [backend] [    Test worker] c.e.s.backend.BackendApplicationTests    : Started BackendApplicationTests in 3.515 seconds (process running for 6.873)
 </pre>
 <button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="root-0-test-stdout-com.example.studybudybackend.backend.BackendApplicationTests">Copy</button>
 </span>
@@ -165,7 +163,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 9.7.1</a> at Nov 18, 2026, 1:56:30 PM</p>
+<a href="https://www.gradle.org">Gradle 9.7.1</a> at Nov 18, 2026, 2:18:12 PM</p>
 </div>
 </div>
 </body>

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-18T21:56:28.051Z" hostname="LOWPOLY_SURF" time="0.762">
+<testsuite name="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-11-18T22:18:05.411Z" hostname="LOWPOLY_SURF" time="2.595">
   <properties/>
-  <testcase name="rejectsMissingCourse()" classname="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" time="0.095"/>
-  <testcase name="rejectsBlankCourse()" classname="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" time="0.009"/>
-  <testcase name="returnsEmptyListWhenNoGroupsMatch()" classname="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" time="0.117"/>
-  <testcase name="returnsMatchingGroups()" classname="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" time="0.024"/>
-  <system-out><![CDATA[2026-11-18T13:56:28.054-08:00  INFO 20984 --- [backend] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studybudybackend.backend.controller.StudyGroupControllerTests]: StudyGroupControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-11-18T13:56:28.090-08:00  INFO 20984 --- [backend] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.controller.StudyGroupControllerTests
-2026-11-18T13:56:28.093-08:00  INFO 20984 --- [backend] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studybudybackend.backend.controller.StudyGroupControllerTests]: StudyGroupControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-11-18T13:56:28.111-08:00  INFO 20984 --- [backend] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.controller.StudyGroupControllerTests
+  <testcase name="createsGroupAndAddsAuthenticatedUserAsOwner()" classname="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" time="0.082"/>
+  <testcase name="returnsRandomGroupsWhenQueryIsBlank()" classname="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" time="0.147"/>
+  <testcase name="returnsRandomGroupsWhenQueryIsMissing()" classname="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" time="0.009"/>
+  <testcase name="returnsEmptyListWhenNoGroupsMatch()" classname="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" time="0.007"/>
+  <testcase name="returnsGroupsMatchingNameOrCourse()" classname="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" time="0.008"/>
+  <testcase name="returnsMatchingGroups()" classname="com.example.studybudybackend.backend.controller.StudyGroupControllerTests" time="0.006"/>
+  <system-out><![CDATA[14:18:05.564 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.studybudybackend.backend.controller.StudyGroupControllerTests]: StudyGroupControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:18:05.707 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.controller.StudyGroupControllerTests
+14:18:05.710 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.studybudybackend.backend.controller.StudyGroupControllerTests]: StudyGroupControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:18:05.723 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.controller.StudyGroupControllerTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -19,12 +21,17 @@
 
  :: Spring Boot ::                (v4.1.1)
 
-2026-11-18T13:56:28.158-08:00  INFO 20984 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : Starting StudyGroupControllerTests using Java 25.0.2 with PID 20984 (started by lowpo in C:\Users\lowpo\OneDrive\Documents\GitHub\studybudy-backend)
-2026-11-18T13:56:28.158-08:00  INFO 20984 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : No active profile set, falling back to 1 default profile: "default"
-2026-11-18T13:56:28.530-08:00  INFO 20984 --- [backend] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-11-18T13:56:28.532-08:00  INFO 20984 --- [backend] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-11-18T13:56:28.534-08:00  INFO 20984 --- [backend] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-11-18T13:56:28.552-08:00  INFO 20984 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : Started StudyGroupControllerTests in 0.434 seconds (process running for 8.41)
+2026-11-18T14:18:06.124-08:00  INFO 33832 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : Starting StudyGroupControllerTests using Java 25.0.2 with PID 33832 (started by lowpo in C:\Users\lowpo\OneDrive\Documents\GitHub\studybudy-backend)
+2026-11-18T14:18:06.127-08:00  INFO 33832 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : No active profile set, falling back to 1 default profile: "default"
+2026-11-18T14:18:07.702-08:00  INFO 33832 --- [backend] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-11-18T14:18:07.703-08:00  INFO 33832 --- [backend] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-18T14:18:07.704-08:00  INFO 33832 --- [backend] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-18T14:18:07.727-08:00  INFO 33832 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : Started StudyGroupControllerTests in 1.941 seconds (process running for 3.061)
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\lowpo\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.18.11\82212e5b3633e7a65fca8bec525762cfb6c9bae4\byte-buddy-agent-1.18.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
 </testsuite>

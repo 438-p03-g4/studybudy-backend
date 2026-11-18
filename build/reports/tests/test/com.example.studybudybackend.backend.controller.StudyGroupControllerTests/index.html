@@ -31,6 +31,9 @@
 <li>
 <a class="" href="#">standard output</a>
 </li>
+<li>
+<a class="" href="#">error output</a>
+</li>
 </ul>
 <div class="tab">
 <h2>summary</h2>
@@ -44,7 +47,7 @@
 <tr>
 <td>
 <div class="infoBox">
-<div class="counter">4</div>
+<div class="counter">6</div>
 <p>tests</p>
 </div>
 </td>
@@ -62,7 +65,7 @@
 </td>
 <td>
 <div class="infoBox duration">
-<div class="counter">0.765s</div>
+<div class="counter">2.600s</div>
 <p>duration</p>
 </div>
 </td>
@@ -93,21 +96,12 @@
 </thead>
 <tbody>
 <tr>
-<td class="success">rejectsBlankCourse()</td>
-<td class="path" hidden="">rejectsBlankCourse()</td>
+<td class="success">createsGroupAndAddsAuthenticatedUserAsOwner()</td>
+<td class="path" hidden="">createsGroupAndAddsAuthenticatedUserAsOwner()</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td data-sort-value="9">0.009s</td>
-<td class="success" data-sort-value="100">100%</td>
-</tr>
-<tr>
-<td class="success">rejectsMissingCourse()</td>
-<td class="path" hidden="">rejectsMissingCourse()</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td data-sort-value="95">0.095s</td>
+<td data-sort-value="82">0.082s</td>
 <td class="success" data-sort-value="100">100%</td>
 </tr>
 <tr>
@@ -116,7 +110,16 @@
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td data-sort-value="117">0.117s</td>
+<td data-sort-value="7">0.007s</td>
+<td class="success" data-sort-value="100">100%</td>
+</tr>
+<tr>
+<td class="success">returnsGroupsMatchingNameOrCourse()</td>
+<td class="path" hidden="">returnsGroupsMatchingNameOrCourse()</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td data-sort-value="8">0.008s</td>
 <td class="success" data-sort-value="100">100%</td>
 </tr>
 <tr>
@@ -125,7 +128,25 @@
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td data-sort-value="24">0.024s</td>
+<td data-sort-value="6">0.006s</td>
+<td class="success" data-sort-value="100">100%</td>
+</tr>
+<tr>
+<td class="success">returnsRandomGroupsWhenQueryIsBlank()</td>
+<td class="path" hidden="">returnsRandomGroupsWhenQueryIsBlank()</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td data-sort-value="147">0.147s</td>
+<td class="success" data-sort-value="100">100%</td>
+</tr>
+<tr>
+<td class="success">returnsRandomGroupsWhenQueryIsMissing()</td>
+<td class="path" hidden="">returnsRandomGroupsWhenQueryIsMissing()</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td data-sort-value="9">0.009s</td>
 <td class="success" data-sort-value="100">100%</td>
 </tr>
 </tbody>
@@ -135,10 +156,10 @@
 <div class="tab">
 <h2>standard output</h2>
 <span class="code">
-<pre id="root-0-test-stdout-com.example.studybudybackend.backend.controller.StudyGroupControllerTests">2026-11-18T13:56:28.054-08:00  INFO 20984 --- [backend] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studybudybackend.backend.controller.StudyGroupControllerTests]: StudyGroupControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-11-18T13:56:28.090-08:00  INFO 20984 --- [backend] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.controller.StudyGroupControllerTests
-2026-11-18T13:56:28.093-08:00  INFO 20984 --- [backend] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.studybudybackend.backend.controller.StudyGroupControllerTests]: StudyGroupControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-2026-11-18T13:56:28.111-08:00  INFO 20984 --- [backend] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.controller.StudyGroupControllerTests
+<pre id="root-0-test-stdout-com.example.studybudybackend.backend.controller.StudyGroupControllerTests">14:18:05.564 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.studybudybackend.backend.controller.StudyGroupControllerTests]: StudyGroupControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:18:05.707 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.controller.StudyGroupControllerTests
+14:18:05.710 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.studybudybackend.backend.controller.StudyGroupControllerTests]: StudyGroupControllerTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:18:05.723 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.studybudybackend.backend.BackendApplication for test class com.example.studybudybackend.backend.controller.StudyGroupControllerTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -149,14 +170,26 @@
 
  :: Spring Boot ::                (v4.1.1)
 
-2026-11-18T13:56:28.158-08:00  INFO 20984 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : Starting StudyGroupControllerTests using Java 25.0.2 with PID 20984 (started by lowpo in C:\Users\lowpo\OneDrive\Documents\GitHub\studybudy-backend)
-2026-11-18T13:56:28.158-08:00  INFO 20984 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : No active profile set, falling back to 1 default profile: &quot;default&quot;
-2026-11-18T13:56:28.530-08:00  INFO 20984 --- [backend] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-11-18T13:56:28.532-08:00  INFO 20984 --- [backend] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-11-18T13:56:28.534-08:00  INFO 20984 --- [backend] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-11-18T13:56:28.552-08:00  INFO 20984 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : Started StudyGroupControllerTests in 0.434 seconds (process running for 8.41)
+2026-11-18T14:18:06.124-08:00  INFO 33832 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : Starting StudyGroupControllerTests using Java 25.0.2 with PID 33832 (started by lowpo in C:\Users\lowpo\OneDrive\Documents\GitHub\studybudy-backend)
+2026-11-18T14:18:06.127-08:00  INFO 33832 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2026-11-18T14:18:07.702-08:00  INFO 33832 --- [backend] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-11-18T14:18:07.703-08:00  INFO 33832 --- [backend] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-18T14:18:07.704-08:00  INFO 33832 --- [backend] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-18T14:18:07.727-08:00  INFO 33832 --- [backend] [    Test worker] c.e.s.b.c.StudyGroupControllerTests      : Started StudyGroupControllerTests in 1.941 seconds (process running for 3.061)
 </pre>
 <button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="root-0-test-stdout-com.example.studybudybackend.backend.controller.StudyGroupControllerTests">Copy</button>
+</span>
+</div>
+<div class="tab">
+<h2>error output</h2>
+<span class="code">
+<pre id="root-0-test-stderr-com.example.studybudybackend.backend.controller.StudyGroupControllerTests">Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\lowpo\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.18.11\82212e5b3633e7a65fca8bec525762cfb6c9bae4\byte-buddy-agent-1.18.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+</pre>
+<button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="root-0-test-stderr-com.example.studybudybackend.backend.controller.StudyGroupControllerTests">Copy</button>
 </span>
 </div>
 </div>
@@ -169,7 +202,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 9.7.1</a> at Nov 18, 2026, 1:56:30 PM</p>
+<a href="https://www.gradle.org">Gradle 9.7.1</a> at Nov 18, 2026, 2:18:12 PM</p>
 </div>
 </div>
 </body>

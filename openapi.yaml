@@ -3,34 +3,37 @@ info:
   title: StudyBuddy API
   version: 0.1.0
   description: |
-    Initial API contract for course-specific group search (PRD-7, issue #1).
-    Group creation, joining, and My Groups are defined in separate issues.
+    Study group discovery for the Find Study Groups client page.
 tags:
   - name: Groups
-    description: Course-specific study groups.
+    description: Study group discovery and search.
 paths:
   /groups:
     get:
       tags: [Groups]
       operationId: searchGroupsByCourse
-      summary: Find study groups by course
+      summary: Find study groups
       description: |
         Requires a valid StudyBuddy-issued bearer JWT.
-        Trim surrounding whitespace from the course parameter and compare the
-        full course value case-insensitively; this is not a substring search.
-        Missing, empty, or whitespace-only course values return 400.
-        Matching groups are ordered by ID ascending for stable results.
+        With no query, returns up to 20 groups in randomized order.
+        With a query, matches group names or course values case-insensitively
+        using a partial-text search.
       security:
         - bearerAuth: []
       parameters:
-        - name: course
+        - name: query
           in: query
-          required: true
-          description: Course identifier to match, for example CST438.
+          required: false
+          description: Optional text to match against group name or course.
           schema:
             type: string
-            minLength: 1
-            pattern: '\S'
+          example: backend
+        - name: course
+          in: query
+          required: false
+          description: Deprecated exact-course filter retained for compatibility.
+          schema:
+            type: string
           example: CST438
       responses:
         '200':
@@ -51,18 +54,6 @@ paths:
                 noMatches:
                   summary: No matching groups
                   value: []
-        '400':
-          description: The course parameter is missing or blank.
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-              example:
-                type: about:blank
-                title: Bad Request
-                status: 400
-                detail: The course query parameter must not be blank.
-                instance: /groups
         '401':
           description: The bearer token is missing, invalid, or expired.
           headers:
@@ -81,6 +72,30 @@ paths:
                 status: 401
                 detail: A valid StudyBuddy bearer token is required.
                 instance: /groups
+    post:
+      tags: [Groups]
+      operationId: createStudyGroup
+      summary: Open a study group
+      description: Creates a group and adds the authenticated user as its first member with the OWNER role.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStudyGroupRequest'
+      responses:
+        '201':
+          description: The study group was created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StudyGroupSummary'
+        '400':
+          description: A required field is blank or a field exceeds its maximum length.
+        '401':
+          description: The authenticated user is missing or could not be found.
 components:
   securitySchemes:
     bearerAuth:
@@ -110,6 +125,34 @@ components:
           minLength: 1
           description: Course identifier associated with the group.
           example: CST438
+        iconUrl:
+          type: string
+          nullable: true
+          maxLength: 500
+          description: Optional image URL for the group icon.
+        description:
+          type: string
+          nullable: true
+          maxLength: 1000
+          description: Optional description of the group.
+    CreateStudyGroupRequest:
+      type: object
+      required: [name, course]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+        course:
+          type: string
+          minLength: 1
+          maxLength: 40
+        iconUrl:
+          type: string
+          maxLength: 500
+        description:
+          type: string
+          maxLength: 1000
     Problem:
       type: object
       description: RFC 9457 Problem Details error response.
