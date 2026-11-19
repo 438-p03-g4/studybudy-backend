@@ -11,4 +11,9 @@ public interface StudyGroupRepository extends JpaRepository<StudyGroup, Long> {
     // Matches the whole course value ignoring case/whitespace, in stable ID order.
     @Query("SELECT g FROM StudyGroup g WHERE lower(trim(g.course)) = lower(trim(:course)) ORDER BY g.id ASC")
     List<StudyGroup> searchByCourse(@Param("course") String course);
+
+    // Matches group names or courses containing the query, ignoring case.
+    @Query("SELECT g FROM StudyGroup g WHERE lower(g.name) LIKE lower(concat('%', :query, '%')) "
+            + "OR lower(g.course) LIKE lower(concat('%', :query, '%')) ORDER BY g.id ASC")
+    List<StudyGroup> searchByQuery(@Param("query") String query);
 }

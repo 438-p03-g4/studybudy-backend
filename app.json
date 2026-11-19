@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "StudyBuddy",
+    "slug": "studybuddy",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "studybuddy",
+    "experiments": {
+      "typedRoutes": true
+    },
+    "plugins": ["expo-router"],
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "android": {
+      "package": "com.example.studybuddy_android"
+    }
+  }
+}

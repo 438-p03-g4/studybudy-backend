@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.studybudybackend.backend.security.GitHubOAuth2UserServiceTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-18T22:18:12.112Z" hostname="LOWPOLY_SURF" time="0.033">
+  <properties/>
+  <testcase name="rejectsWhenGitHubEmailEndpointFails()" classname="com.example.studybudybackend.backend.security.GitHubOAuth2UserServiceTests" time="0.019"/>
+  <testcase name="savesUserFromPrimaryVerifiedGitHubEmailAndReturnsEmailAttribute()" classname="com.example.studybudybackend.backend.security.GitHubOAuth2UserServiceTests" time="0.01"/>
+  <testcase name="rejectsGitHubAccountWithoutPrimaryVerifiedEmail()" classname="com.example.studybudybackend.backend.security.GitHubOAuth2UserServiceTests" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
