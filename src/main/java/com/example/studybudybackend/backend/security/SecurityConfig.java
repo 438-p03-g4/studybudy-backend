@@ -4,9 +4,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -20,6 +23,7 @@ public class SecurityConfig {
             GitHubOAuth2UserService githubUserService,
             @Value("${app.frontend-success-url}") String frontendSuccessUrl
     ) throws Exception {
+        RequestMatcher apiRequest = request -> request.getServletPath().startsWith("/api/");
         http
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
@@ -27,6 +31,12 @@ public class SecurityConfig {
                                 "/", "/error", "/oauth2/**", "/login/**", "/actuator/health"
                         ).permitAll()
                         .anyRequest().authenticated()
+                )
+                .exceptionHandling(exceptions -> exceptions
+                        .defaultAuthenticationEntryPointFor(
+                                new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
+                                apiRequest
+                        )
                 )
                 .oauth2Login(oauth -> oauth
                         .userInfoEndpoint(userInfo ->
