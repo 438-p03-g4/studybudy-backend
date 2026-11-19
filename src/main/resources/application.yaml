@@ -29,5 +29,5 @@ spring:
               - user:email
 
 app:
-  frontend-origin: ${FRONTEND_ORIGIN:http://localhost:5173}
-  frontend-success-url: ${FRONTEND_SUCCESS_URL:http://localhost:5173/login/success}
+  frontend-origin: ${FRONTEND_ORIGIN:http://localhost:8081}
+  frontend-success-url: ${FRONTEND_SUCCESS_URL:http://localhost:8081/login/success}
