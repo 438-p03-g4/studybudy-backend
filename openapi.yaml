@@ -5,23 +5,75 @@ info:
   version: 0.1.0
   description: |
     API contract for study group search (PRD-7) and creation (PRD-6).
-    Joining groups and My Groups are defined in separate issues.
+    Authentication currently uses the existing OAuth2 login session.
+    StudyBuddy bearer JWT integration is tracked separately in issue #19.
 
 tags:
   - name: Groups
-    description: Course-specific study groups.
+    description: Study group discovery and creation.
 
 paths:
   /groups:
+    get:
+      tags: [Groups]
+      operationId: searchGroupsByCourse
+      summary: Find study groups
+      description: |
+        With a non-blank query, searches group names and course values
+        case-insensitively using partial-text matching.
+        Otherwise, a non-blank course applies the exact-course filter.
+        Without either filter, returns groups in randomized order.
+        Returns at most 20 groups.
+      parameters:
+        - name: query
+          in: query
+          required: false
+          description: Text to match against group name or course.
+          schema:
+            type: string
+          example: backend
+        - name: course
+          in: query
+          required: false
+          description: |
+            Exact-course filter retained for compatibility.
+            Used only when query is missing or blank.
+          schema:
+            type: string
+          example: CST438
+      responses:
+        '200':
+          description: Matching groups, or an empty array.
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 20
+                items:
+                  $ref: '#/components/schemas/StudyGroupSummary'
+              examples:
+                matchingGroups:
+                  value:
+                    - id: 1
+                      name: CST438 Study Group
+                      course: CST438
+                      iconUrl: null
+                      description: null
+                noMatches:
+                  value: []
+
     post:
       tags: [Groups]
       operationId: createStudyGroup
       summary: Create a study group
       description: |
-        Requires a valid StudyBuddy-issued bearer JWT.
-        Leading and trailing whitespace is removed before saving.
-      security:
-        - bearerAuth: []
+        Requires an authenticated OAuth2 user whose email matches
+        an existing StudyBuddy user.
+        Creates the group and an OWNER membership for its creator
+        in one transaction.
+        Surrounding whitespace is trimmed before saving.
+        Blank optional fields are stored as null.
+        Bearer JWT authentication will follow in issue #19.
       requestBody:
         required: true
         content:
@@ -31,9 +83,10 @@ paths:
             example:
               name: CST438 Study Group
               course: CST438
+              description: Weekly backend study sessions.
       responses:
         '201':
-          description: Study group created and persisted.
+          description: Group and owner membership created.
           content:
             application/json:
               schema:
@@ -42,112 +95,30 @@ paths:
                 id: 1
                 name: CST438 Study Group
                 course: CST438
+                iconUrl: null
+                description: Weekly backend study sessions.
         '400':
-          description: Missing, blank, oversized, or malformed input.
+          description: |
+            Missing request body, malformed JSON, missing or blank
+            required fields, or values exceeding their length limits.
           content:
             application/problem+json:
               schema:
                 $ref: '#/components/schemas/Problem'
-              example:
-                type: about:blank
-                title: Bad Request
-                status: 400
-                detail: The group name and course must not be blank.
-                instance: /groups
         '401':
-          $ref: '#/components/responses/Unauthorized'
-
-    get:
-      tags: [Groups]
-      operationId: searchGroupsByCourse
-      summary: Find study groups by course
-      description: |
-        Requires a valid StudyBuddy-issued bearer JWT.
-        Trim surrounding whitespace from the course parameter and compare the
-        full course value case-insensitively; this is not a substring search.
-        Missing, empty, or whitespace-only course values return 400.
-        Matching groups are ordered by ID ascending for stable results.
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: course
-          in: query
-          required: true
-          description: Course identifier to match, for example CST438.
-          schema:
-            type: string
-            minLength: 1
-            pattern: '\S'
-          example: CST438
-      responses:
-        '200':
-          description: Matching groups; an empty array when no groups match.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/StudyGroupSummary'
-              examples:
-                matchingGroups:
-                  summary: A matching group
-                  value:
-                    - id: 1
-                      name: CST438 Study Group
-                      course: CST438
-                noMatches:
-                  summary: No matching groups
-                  value: []
-        '400':
-          description: The course parameter is missing or blank.
-          content:
-            application/problem+json:
-              schema:
-                $ref: '#/components/schemas/Problem'
-              example:
-                type: about:blank
-                title: Bad Request
-                status: 400
-                detail: The course query parameter must not be blank.
-                instance: /groups
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+          description: |
+            The authenticated user email is missing or does not
+            match an existing StudyBuddy user.
+            Unauthenticated requests may also be intercepted by
+            the current OAuth2 security configuration.
 
 components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-      description: JWT issued by the StudyBuddy API after Google or GitHub sign-in.
-
-  responses:
-    Unauthorized:
-      description: The bearer token is missing, invalid, or expired.
-      headers:
-        WWW-Authenticate:
-          description: Bearer authentication challenge.
-          schema:
-            type: string
-          example: Bearer
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          example:
-            type: about:blank
-            title: Unauthorized
-            status: 401
-            detail: A valid StudyBuddy bearer token is required.
-            instance: /groups
-
   schemas:
     CreateStudyGroupRequest:
       type: object
       description: |
-        Group name and course identifier.
-        Length limits apply to the submitted strings.
-        Surrounding whitespace is removed before persistence.
+        Length limits apply before trimming.
+        Name and course must contain a non-whitespace character.
       required: [name, course]
       properties:
         name:
@@ -155,15 +126,23 @@ components:
           minLength: 1
           maxLength: 120
           pattern: '\S'
-          description: Group name containing at least one non-whitespace character.
           example: CST438 Study Group
         course:
           type: string
           minLength: 1
           maxLength: 40
           pattern: '\S'
-          description: Course identifier containing at least one non-whitespace character.
           example: CST438
+        iconUrl:
+          type: string
+          nullable: true
+          maxLength: 500
+          description: Optional group icon URL.
+        description:
+          type: string
+          nullable: true
+          maxLength: 1000
+          description: Optional group description.
 
     StudyGroupSummary:
       type: object
@@ -174,22 +153,25 @@ components:
           type: integer
           format: int64
           minimum: 1
-          description: Unique group identifier.
           example: 1
         name:
           type: string
-          minLength: 1
-          description: Display name of the group.
           example: CST438 Study Group
         course:
           type: string
-          minLength: 1
-          description: Course identifier associated with the group.
           example: CST438
+        iconUrl:
+          type: string
+          nullable: true
+          maxLength: 500
+        description:
+          type: string
+          nullable: true
+          maxLength: 1000
 
     Problem:
       type: object
-      description: RFC 9457 Problem Details error response.
+      description: Problem Details response for invalid creation requests.
       required: [type, title, status, detail]
       properties:
         type:
@@ -198,12 +180,15 @@ components:
           example: about:blank
         title:
           type: string
+          example: Bad Request
         status:
           type: integer
           minimum: 400
           maximum: 599
+          example: 400
         detail:
           type: string
         instance:
           type: string
           format: uri-reference
+          example: /groups

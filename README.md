@@ -59,8 +59,11 @@ The audited main commit had 15 tests. Record the actual count for the tested com
 See [the runbook](docs/runbook.md) for local seed data, logs, ports, stopping the
 stack, native test commands, and known limitations.
 
-Current client checks (`npm run typecheck` and web export) are build checks,
-not a client unit/e2e test suite. Group joining is not a completed client flow yet.
+The client group-search page calls `GET /groups` with an optional `query`
+parameter. With no query, the API returns up to 20 randomized groups; with a
+query, it performs a case-insensitive partial match against group names and
+courses. The endpoint remains protected and requires an authenticated
+StudyBuddy session.
 
 File each onboarding blocker as a separate issue with label `onboarding`, exact
 command/output, expected result, documentation step, and OS/Docker versions.

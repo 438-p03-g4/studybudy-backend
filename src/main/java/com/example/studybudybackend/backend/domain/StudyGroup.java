@@ -25,6 +25,12 @@ public class StudyGroup {
     @Column(nullable = false, length = 40)
     private String course;
 
+    @Column(name = "icon_url", length = 500)
+    private String iconUrl;
+
+    @Column(length = 1000)
+    private String description;
+
     // A group can have many memberships; each membership refers to one user.
     @OneToMany(mappedBy = "studyGroup")
     private Set<Membership> memberships = new HashSet<>();
@@ -36,6 +42,13 @@ public class StudyGroup {
     public StudyGroup(String name, String course) {
         this.name = name;
         this.course = course;
+    }
+
+    public StudyGroup(String name, String course, String iconUrl, String description) {
+        this.name = name;
+        this.course = course;
+        this.iconUrl = iconUrl;
+        this.description = description;
     }
 
     public Long getId() {
@@ -60,6 +73,22 @@ public class StudyGroup {
 
     public void setCourse(String course) {
         this.course = course;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Set<Membership> getMemberships() {
