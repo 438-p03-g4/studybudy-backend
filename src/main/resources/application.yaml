@@ -1,6 +1,13 @@
 spring:
   application:
     name: backend
+  servlet:
+    session:
+      cookie:
+        # Lax is suitable for local same-site testing; set None + Secure when
+        # the frontend and API use different sites (for example, localhost + Render).
+        same-site: ${SESSION_COOKIE_SAME_SITE:lax}
+        secure: ${SESSION_COOKIE_SECURE:false}
   datasource:
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}

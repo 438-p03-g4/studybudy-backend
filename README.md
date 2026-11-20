@@ -100,5 +100,9 @@ Set these environment variables in the Render service settings using the Neon co
 - `DATABASE_URL`: `jdbc:postgresql://<neon-host>/<database>?sslmode=require&channel_binding=require`
 - `DATABASE_USERNAME`: Neon role name
 - `DATABASE_PASSWORD`: Neon role password
+- `FRONTEND_ORIGIN`: exact frontend origin. For local Expo testing, `http://localhost:8081`.
+- `FRONTEND_SUCCESS_URL`: frontend callback page. For local Expo testing, `http://localhost:8081/login/success`.
+- `SESSION_COOKIE_SAME_SITE`: set to `none` when the frontend and API are on different sites.
+- `SESSION_COOKIE_SECURE`: set to `true` for Render's HTTPS service.
 
 Don't commit or put the database credentials on dockerfile
