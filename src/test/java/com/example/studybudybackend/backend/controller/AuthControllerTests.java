@@ -32,4 +32,27 @@ class AuthControllerTests {
         assertEquals("Student Name", profile.displayName());
         verify(userRepository).findByEmailIgnoreCase("student@example.com");
     }
+
+    @Test
+    void updatesDisplayNameForOAuthPrincipalEmail() {
+        UserRepository userRepository = mock(UserRepository.class);
+        User user = new User("student@example.com", "Student");
+        user.setId(42L);
+        when(userRepository.findByEmailIgnoreCase("student@example.com"))
+                .thenReturn(Optional.of(user));
+        when(userRepository.save(user)).thenReturn(user);
+
+        OAuth2User principal = mock(OAuth2User.class);
+        when(principal.getAttribute("email")).thenReturn("student@example.com");
+
+        AuthController.UserProfile profile = new AuthController(userRepository)
+                .updateDisplayName(
+                        principal,
+                        new AuthController.UpdateDisplayNameRequest("  New Name  ")
+                );
+
+        assertEquals("New Name", user.getDisplayName());
+        assertEquals("New Name", profile.displayName());
+        verify(userRepository).save(user);
+    }
 }

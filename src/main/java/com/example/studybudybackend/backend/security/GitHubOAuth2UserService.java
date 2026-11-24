@@ -64,13 +64,10 @@ public class GitHubOAuth2UserService
             );
         }
 
-        String name = (String) githubUser.getAttributes().get("name");
         String login = (String) githubUser.getAttributes().get("login");
 
         final String displayName =
-                name != null && !name.isBlank() ? name
-                        : login != null && !login.isBlank() ? login
-                        : email;
+                login != null && !login.isBlank() ? login : email.substring(0, email.indexOf('@'));
 
         userRepository.findByEmailIgnoreCase(email)
                 .orElseGet(() -> userRepository.save(new User(email, displayName)));

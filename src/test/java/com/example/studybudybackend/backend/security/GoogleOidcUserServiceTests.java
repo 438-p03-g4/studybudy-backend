@@ -36,7 +36,7 @@ class GoogleOidcUserServiceTests {
     void savesNewUserWhenGoogleEmailIsVerified() {
         when(googleUser.getEmail()).thenReturn("student@example.com");
         when(googleUser.getEmailVerified()).thenReturn(true);
-        when(googleUser.getFullName()).thenReturn("Student Name");
+        when(googleUser.getGivenName()).thenReturn("Student");
         when(userRepository.findByEmailIgnoreCase("student@example.com"))
                 .thenReturn(Optional.empty());
         when(userRepository.save(any(User.class)))
@@ -48,7 +48,7 @@ class GoogleOidcUserServiceTests {
         ArgumentCaptor<User> savedUser = forClass(User.class);
         verify(userRepository).save(savedUser.capture());
         assertEquals("student@example.com", savedUser.getValue().getEmail());
-        assertEquals("Student Name", savedUser.getValue().getDisplayName());
+        assertEquals("Student", savedUser.getValue().getDisplayName());
     }
 
     @Test

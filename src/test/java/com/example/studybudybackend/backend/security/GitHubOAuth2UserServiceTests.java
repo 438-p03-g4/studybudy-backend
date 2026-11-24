@@ -86,7 +86,7 @@ class GitHubOAuth2UserServiceTests {
         ArgumentCaptor<User> savedUser = forClass(User.class);
         verify(userRepository).save(savedUser.capture());
         assertEquals("study@example.com", savedUser.getValue().getEmail());
-        assertEquals("Study User", savedUser.getValue().getDisplayName());
+        assertEquals("study-user", savedUser.getValue().getDisplayName());
         server.verify();
     }
 
