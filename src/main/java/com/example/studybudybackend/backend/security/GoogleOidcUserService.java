@@ -47,9 +47,11 @@ public class GoogleOidcUserService
             );
         }
 
-        String fullName = googleUser.getFullName();
+        String givenName = googleUser.getGivenName();
         final String displayName =
-                (fullName == null || fullName.isBlank()) ? email : fullName;
+                (givenName == null || givenName.isBlank())
+                        ? email.substring(0, email.indexOf('@'))
+                        : givenName;
 
         userRepository.findByEmailIgnoreCase(email)
                 .orElseGet(() -> userRepository.save(new User(email, displayName)));
